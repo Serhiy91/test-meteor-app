@@ -3,16 +3,13 @@
 </head>
 <body>
 	<div class="container">
-		<header></header>
-		<section class="previous-queries"></section>
-		<section class="map">
-			<form role="form">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Enter a query" />
-				</div>
-			</form>
+		{{#unless currentUser}}
+			{{> auth}}
+		{{else}}
+			{{> userInfo}}
+			{{> prevQueries}}
 			{{> map}}
-		</section>
-		<section class="venues-list"></section>
+			{{> venuesList}}
+		{{/unless}}
 	</div>
 </body>

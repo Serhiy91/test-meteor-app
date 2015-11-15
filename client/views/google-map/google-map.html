@@ -1,5 +1,12 @@
 <template name="map">
-	<div class="map-container">
-		{{> googleMap name="map" options=mapOptions}}
-	</div>
+	<section class="map">
+		<form class="main-form" role="form">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Enter a query"/>
+			</div>
+		</form>
+		<div class="map-container">
+			{{> googleMap name="map" options=mapOptions}}
+		</div>
+	</section>
 </template>
