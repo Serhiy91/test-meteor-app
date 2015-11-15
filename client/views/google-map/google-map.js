@@ -20,6 +20,11 @@ Template.map.helpers({
 Template.map.events({
 	'submit .main-form': function(e) {
 		e.preventDefault();
+		if (!e.target[0].value) {
+			alert('Please fill in a headline');
+			return;
+		}
+
 		var R_EARTH = 6378;
 		var RADIANS = 57.2958;
 
@@ -43,5 +48,7 @@ Template.map.events({
 			lng: centerCords.lng,
 			radius: distance
 		};
+
+		Meteor.call('addQuery', queryObject);
 	}
 });

@@ -1,3 +1,17 @@
 <template name="prevQueries">
-	<section class="previous-queries"></section>
+	<section class="previous-queries">
+		<table class="table">
+			<tbody>
+			{{#each queries}}
+				<tr>
+					<td>{{query}}</td>
+					<td>{{lat}}</td>
+					<td>{{lng}}</td>
+					<td>{{radius}}</td>
+					<td>{{date}}</td>
+				</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</section>
 </template>
