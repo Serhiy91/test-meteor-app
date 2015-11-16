@@ -1,3 +1,17 @@
 <template name="venuesList">
-	<section class="venues-list"></section>
+	<section class="venues-list">
+		<table class="table">
+			<tbody>
+			{{#each venues}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{location.city}}</td>
+					<td>{{location.address}}</td>
+					<td>{{location.lat}}</td>
+					<td>{{location.lng}}</td>
+				</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</section>
 </template>

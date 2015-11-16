@@ -18,10 +18,9 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 
 fourseven:scss
 dburles:google-maps
-oleh:foursquare
-accounts-google
-accounts-password
 twbs:bootstrap
 fortawesome:fontawesome
+accounts-google
+accounts-password
 service-configuration
 http

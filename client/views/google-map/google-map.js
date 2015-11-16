@@ -21,8 +21,7 @@ Template.map.events({
 	'submit .main-form': function(e) {
 		e.preventDefault();
 		if (!e.target[0].value) {
-			alert('Please fill in a headline');
-			return;
+			throw new Meteor.Error('Please fill in a headline');
 		}
 
 		var R_EARTH = 6378;
@@ -49,6 +48,12 @@ Template.map.events({
 			radius: distance
 		};
 
-		Meteor.call('addQuery', queryObject);
+		Meteor.call('searchVenues', queryObject, function(err, res) {
+			Meteor.call('addQuery', queryObject);
+			Venues.remove({});
+			for (var i = 0; i < res.length; i++) {
+				Venues.insert(res[i]);
+			}
+		});
 	}
 });
