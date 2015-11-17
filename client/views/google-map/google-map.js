@@ -27,7 +27,8 @@ Template.map.events({
 		var R_EARTH = 6378;
 		var RADIANS = 57.2958;
 
-		var bounds = GoogleMaps.maps.map.instance.getBounds();
+		var map = GoogleMaps.maps.map.instance;
+		var bounds = map.getBounds();
 		var centerCords = {
 			lat: bounds.getCenter().lat(),
 			lng: bounds.getCenter().lng()
@@ -45,15 +46,18 @@ Template.map.events({
 			query: e.target[0].value,
 			lat: centerCords.lat,
 			lng: centerCords.lng,
-			radius: distance
+			radius: distance,
+			zoom: map.getZoom()
 		};
 
-		Meteor.call('searchVenues', queryObject, function(err, res) {
+		//make request to foursquare
+		Meteor.call('searchVenues', queryObject, function(err, venues) {
 			Meteor.call('addQuery', queryObject);
+
 			Venues.remove({});
-			for (var i = 0; i < res.length; i++) {
-				Venues.insert(res[i]);
-			}
+			_.each(venues, function(venue) {
+				Venues.insert(venue);
+			});
 		});
 	}
 });

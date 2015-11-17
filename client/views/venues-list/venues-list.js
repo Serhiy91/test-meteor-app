@@ -27,3 +27,9 @@ Template.venuesList.helpers({
 		return Venues.find().count();
 	}
 });
+
+Template.venuesList.events({
+	'click .csv': function() {
+		MyAppExporter.exportVenues();
+	}
+});

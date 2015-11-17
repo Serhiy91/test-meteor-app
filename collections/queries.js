@@ -8,7 +8,7 @@ Meteor.methods({
 			return;
 		}
 
-		query = _.extend(_.pick(query, 'query', 'lat', 'lng', 'radius'), {
+		query = _.extend(_.pick(query, 'query', 'lat', 'lng', 'radius', 'zoom'), {
 			userId: user._id,
 			date: new Date().getTime()
 		});
