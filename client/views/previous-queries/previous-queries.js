@@ -5,3 +5,9 @@ Template.prevQueries.helpers({
 		return Queries.find();
 	}
 });
+
+Template.prevQueries.events({
+	'click .delete': function() {
+		Meteor.call('deleteQuery', this._id);
+	}
+});

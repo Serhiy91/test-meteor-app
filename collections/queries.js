@@ -3,7 +3,7 @@ Queries = new Meteor.Collection('queries');
 Meteor.methods({
 	addQuery: function(query) {
 		var user = Meteor.user();
-		if (!user) {
+		if (!Meteor.userId()) {
 			alert("You need to login to post new stories");
 			return;
 		}
@@ -14,5 +14,12 @@ Meteor.methods({
 		});
 
 		return Queries.insert(query);
+	},
+	deleteQuery: function(queryId) {
+		if (!Meteor.userId()) {
+			alert("You need to login to post new stories");
+			return;
+		}
+		Queries.remove(queryId);
 	}
 });
