@@ -2,10 +2,10 @@ var LATITUDE = 35.6833;
 var LONGITUDE = 139.7833;
 var ZOOM = 11;
 
+//load map
 Meteor.startup(function() {
 	GoogleMaps.load();
 });
-
 Template.map.helpers({
 	mapOptions: function() {
 		if (GoogleMaps.loaded()) {
@@ -27,6 +27,7 @@ Template.map.events({
 		var R_EARTH = 6378;
 		var RADIANS = 57.2958;
 
+		//get google map data for request to foursquare
 		var map = GoogleMaps.maps.map.instance;
 		var bounds = map.getBounds();
 		var centerCords = {

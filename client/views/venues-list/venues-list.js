@@ -1,21 +1,22 @@
 Venues = new Meteor.Collection(null);
 var markers = [];
 
+//make reactive map markers
 Venues.find().observe({
 	added: function(venue) {
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(venue.location.lat, venue.location.lng),
-			map: GoogleMaps.maps.map.instance,
-			id: venue._id
+			map: GoogleMaps.maps.map.instance
 		});
 		markers.push(marker);
 	},
-	removed: function(mark) {
-		for (var i = 0; i < markers.length; i++) {
-			markers[i].setMap(null);
+	removed: function() {
+		if (markers.length !== 0) {
+			_.each(markers, function(marker) {
+				marker.setMap(null);
+			});
+			markers = [];
 		}
-		console.log(markers.length);
-		markers = [];
 	}
 });
 
@@ -30,6 +31,6 @@ Template.venuesList.helpers({
 
 Template.venuesList.events({
 	'click .csv': function() {
-		MyAppExporter.exportVenues();
+		exportVenues();
 	}
 });

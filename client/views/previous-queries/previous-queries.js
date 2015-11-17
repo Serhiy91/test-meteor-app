@@ -8,7 +8,7 @@ Template.prevQueries.helpers({
 
 Template.prevQueries.events({
 	'click .delete': function() {
-		Meteor.call('deleteQuery', this._id);
+		Queries.remove(this._id);
 	},
 	'click .query': function(e) {
 		e.preventDefault();
