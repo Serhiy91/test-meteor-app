@@ -17,6 +17,8 @@ Template.map.helpers({
 	}
 });
 
+map = new Map();
+
 Template.map.events({
 	'submit .main-form': function(e) {
 		e.preventDefault();
@@ -24,32 +26,9 @@ Template.map.events({
 			throw new Meteor.Error('Please fill in a headline');
 		}
 
-		var R_EARTH = 6378;
-		var RADIANS = 57.2958;
-
 		//get google map data for request to foursquare
-		var map = GoogleMaps.maps.map.instance;
-		var bounds = map.getBounds();
-		var centerCords = {
-			lat: bounds.getCenter().lat(),
-			lng: bounds.getCenter().lng()
-		};
-		var northEastRadCords = {
-			lat: bounds.getNorthEast().lat() / RADIANS,
-			lng: bounds.getNorthEast().lng() / RADIANS
-		};
-
-		var distance = R_EARTH * Math.acos(Math.sin(centerCords.lat / RADIANS) *
-				Math.sin(northEastRadCords.lat) + Math.cos(centerCords.lat / RADIANS) *
-				Math.cos(northEastRadCords.lat) * Math.cos(northEastRadCords.lng - centerCords.lng / RADIANS));
-
-		var queryObject = {
-			query: e.target[0].value,
-			lat: centerCords.lat,
-			lng: centerCords.lng,
-			radius: distance,
-			zoom: map.getZoom()
-		};
+		var queryObject = map.getCurrentState(GoogleMaps.maps.map.instance);
+		queryObject.query = e.target[0].value;
 
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
