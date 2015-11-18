@@ -31,3 +31,30 @@
 		float: right;
 	}
 }
+
+.errors {
+	margin: 20px;
+	position: fixed;
+	right: 0;
+	z-index: 100;
+	.alert {
+		position: relative;
+		animation: error-appear 0.5s;
+		opacity: 0.9;
+		margin-bottom: 5px;
+		button {
+			margin-left: 20px;
+		}
+	}
+}
+
+@keyframes error-appear {
+	from {
+		right: -200px;
+		opacity: 0;
+	}
+	to {
+		right: 0;
+		opacity: 0.9;
+	}
+}

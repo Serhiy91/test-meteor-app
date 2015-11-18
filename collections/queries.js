@@ -10,7 +10,7 @@ Meteor.methods({
 	addQuery: function(query) {
 		var user = Meteor.user();
 		if (!Meteor.userId()) {
-			alert("You need to login to post new stories");
+			throwError("You need to login to add new queries");
 			return;
 		}
 

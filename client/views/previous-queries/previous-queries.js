@@ -10,17 +10,20 @@ Template.prevQueries.events({
 	'click .delete': function() {
 		Queries.remove(this._id);
 	},
-	'click .query': function(e) {
+	'click .request': function(e) {
 		e.preventDefault();
-		var map = GoogleMaps.maps.map.instance;
 		var queryObject = Queries.findOne(this._id);
 
 		//set options for google map
-		map.setCenter(new google.maps.LatLng(queryObject.lat, queryObject.lng));
-		map.setZoom(queryObject.zoom);
+		map.setMapState(queryObject, GoogleMaps.maps.map.instance);
 
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
+			if (err) {
+				throwError('Sorry, the request was unsuccessful');
+				return;
+			}
+
 			Venues.remove({});
 			_.each(venues, function(venue) {
 				Venues.insert(venue);

@@ -2,6 +2,16 @@ var FOURSQUARE_VERSION = '20130815';
 
 Meteor.methods({
 	'searchVenues': function(queryData) {
+		if (!CLIENT_ID || !CLIENT_SECRET) {
+			throwError('Foursqaure is not configured');
+			return;
+		}
+
+		if(!Meteor.user()) {
+			throwError('You need to sign in');
+			return;
+		}
+
 		var params = {
 			client_id: CLIENT_ID,
 			client_secret: CLIENT_SECRET,
@@ -11,7 +21,12 @@ Meteor.methods({
 			ll: queryData.lat + ',' + queryData.lng
 		};
 
-		var result = HTTP.get('https://api.foursquare.com/v2/venues/search', {params: params});
-		return result.data.response.venues;
+		try {
+			var response = HTTP.get('https://api.foursquare.com/v2/venues/search', {params: params});
+		} catch(err) {
+			throwError('Sorry, the request to foursquare was unsuccessful');
+		}
+
+		return response.data.response.venues;
 	}
 });

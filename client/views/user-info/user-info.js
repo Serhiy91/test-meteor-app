@@ -1,6 +1,14 @@
 Template.userInfo.events({
-	'click .logout': function(e){
+	'click .logout': function(e) {
 		e.preventDefault();
-		Meteor.logout();
+		Meteor.logout(function(err) {
+			if (err) {
+				if (err.message) {
+					throwError(err.message);
+				} else {
+					throwError('Can not logout');
+				}
+			}
+		});
 	}
 });
