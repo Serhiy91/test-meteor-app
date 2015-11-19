@@ -1,11 +1,18 @@
 <template name="userInfo">
-	<header>
-		<div class="dropdown user-info">
-			<a href class="dropdown-toggle" data-toggle="dropdown">
-				{{currentUser.profile.name}}
-				<span class="caret"></span> </a>
-			<ul class="dropdown-menu dropdown-menu-right" role="menu">
-				<li><a href class="logout">Logout</a></li>
+	<header class="navbar navbar-inverse header">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href>Test Meteor App</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown user-info">
+					<a href class="dropdown-toggle" data-toggle="dropdown">
+						{{currentUser.profile.name}}
+						<span class="caret"></span> </a>
+					<ul class="dropdown-menu dropdown-menu-right" role="menu">
+						<li><a href class="logout">Logout</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</header>

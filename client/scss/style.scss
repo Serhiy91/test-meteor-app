@@ -19,21 +19,17 @@
 @keyframes logo-animate {
 	from {
 		top: -20px;
-		opacity: 0;
 	}
 	to {
 		top: 0;
-		opacity: 1;
 	}
 }
 @keyframes login-animate {
 	from {
 		top: 60px;
-		opacity: 0;
 	}
 	to {
 		top: 0;
-		opacity: 1;
 	}
 }
 @keyframes error-appear {
@@ -57,27 +53,6 @@
 
 body {
 	background: #eeeeee;
-}
-
-.container {
-	opacity: 1;
-	animation: content-appear 0.7s;
-	.map-container {
-		width: 100%;
-		max-width: 100%;
-		height: 400px;
-	}
-
-	.user-info {
-		margin: 20px 0;
-		float: right;
-	}
-
-	.venues-list {
-		.csv {
-			float: right;
-		}
-	}
 }
 
 .header-auth-page {
@@ -132,6 +107,40 @@ body {
 			height: 50px;
 			float:right;
 			border-radius: 50%;
+		}
+	}
+}
+
+.navbar.navbar-inverse.header {
+	background: #337ab7;
+	border: 0;
+	border-radius: 0;
+	@include box-shadow-helper(1);
+	.dropdown > a {
+		color: #fff;
+		&:hover {
+			color: #E0E0E0;
+		}
+		&:focus {
+			background: #286192;
+		}
+	}
+	.navbar-brand {
+		color: #fff;
+	}
+}
+
+.container {
+	opacity: 1;
+	animation: content-appear 0.7s;
+	.map-container {
+		width: 100%;
+		max-width: 100%;
+		height: 400px;
+	}
+	.venues-list {
+		.csv {
+			float: right;
 		}
 	}
 }
