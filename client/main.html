@@ -6,15 +6,15 @@
 		{{#if loadingUser}}
 			{{> spinner}}
 		{{else}}
-			<div class="container">
-				{{#unless currentUser}}
-					{{> auth}}
-				{{else}}
+			{{#unless currentUser}}
+				{{> auth}}
+			{{else}}
+				<div class="container">
 					{{> userInfo}}
 					{{> prevQueries}}
 					{{> map}}
 					{{> venuesList}}
-				{{/unless}}
-			</div>
+				</div>
+			{{/unless}}
 		{{/if}}
 </body>

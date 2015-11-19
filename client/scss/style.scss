@@ -1,34 +1,138 @@
-.map-container {
-	width: 100%;
-	max-width: 100%;
-	height: 400px;
+@mixin box-shadow-helper($level) {
+	@if ($level == 1) {
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	}
+	@if ($level == 2) {
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	}
+	@if ($level == 3) {
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+	}
+	@if ($level == 4) {
+		box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+	}
+	@if ($level == 5) {
+		box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+	}
 }
 
-.authentication {
-	text-align: center;
-	padding: 150px 0;
-	.google-btn {
-		padding: 0;
-		.fa-google {
-			display: inline-block;
-			font-size: 130%;
-			border-right: 1px solid rgba(0,0,0,0.2);
-			line-height: 100%;
-		}
-		span {
-			padding: 7px 10px 7px 10px;
+@keyframes logo-animate {
+	from {
+		top: -20px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+@keyframes login-animate {
+	from {
+		top: 60px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+@keyframes error-appear {
+	from {
+		right: -200px;
+		opacity: 0;
+	}
+	to {
+		right: 0;
+		opacity: 0.9;
+	}
+}
+@keyframes content-appear {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+body {
+	background: #eeeeee;
+}
+
+.container {
+	opacity: 1;
+	animation: content-appear 0.7s;
+	.map-container {
+		width: 100%;
+		max-width: 100%;
+		height: 400px;
+	}
+
+	.user-info {
+		margin: 20px 0;
+		float: right;
+	}
+
+	.venues-list {
+		.csv {
+			float: right;
 		}
 	}
 }
 
-.user-info {
-	margin: 20px 0;
-	float: right;
+.header-auth-page {
+	margin: 50px;
+	text-align: center;
+	position: relative;
+	animation: logo-animate 0.5s;
+	h1 {
+		color: #fff;
+		font-weight: bold;
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+	}
 }
-
-.venues-list {
-	.csv {
-		float: right;
+.login-form {
+	margin: 0 auto;
+	max-width: 400px;
+	background: #fff;
+	border-radius: 10px;
+	position: relative;
+	animation: login-animate 0.5s;
+	@include box-shadow-helper(1);
+	.content-login {
+		padding: 15px 25px 25px;
+		.google-btn {
+			padding: 0;
+			display: block;
+			text-align: left;
+			transition: all 250ms;
+			@include box-shadow-helper(2);
+			&:hover {
+				@include box-shadow-helper(3);
+				transform: translateY(-5px);
+			}
+			.fa-google {
+				font-size: 130%;
+				border-right: 1px solid rgba(0, 0, 0, 0.2);
+				line-height: 100%;
+			}
+			span {
+				padding: 7px 10px 7px 10px;
+			}
+		}
+	}
+	.header-login {
+		border-bottom: 1px solid #BDBDBD;
+		h3 {
+			padding: 25px 25px 20px;
+			margin: 0;
+		}
+		img {
+			margin: 12px 25px;
+			height: 50px;
+			float:right;
+			border-radius: 50%;
+		}
 	}
 }
 
@@ -48,27 +152,13 @@
 	}
 }
 
-.container {
-	opacity: 1;
-	animation: content-appear 0.7s;
-}
-
-@keyframes error-appear {
-	from {
-		right: -200px;
-		opacity: 0;
+@media (max-width: 400px) {
+	.header-auth-page {
+		h1 {
+			font-size: 170%;
+		}
 	}
-	to {
-		right: 0;
-		opacity: 0.9;
-	}
-}
-
-@keyframes content-appear {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
+	.login-form {
+		border-radius: 0;
 	}
 }
