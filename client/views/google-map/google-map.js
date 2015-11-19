@@ -11,10 +11,27 @@ Template.map.helpers({
 		if (GoogleMaps.loaded()) {
 			return {
 				center: new google.maps.LatLng(LATITUDE, LONGITUDE),
-				zoom: ZOOM
+				zoom: ZOOM,
+				mapTypeControl: true,
+				mapTypeControlOptions: {
+					position: google.maps.ControlPosition.BOTTOM_LEFT,
+					mapTypeIds: [
+						google.maps.MapTypeId.ROADMAP,
+						google.maps.MapTypeId.SATELLITE
+					]
+				}
 			};
 		}
 	}
+});
+
+Template.map.onCreated(function() {
+	GoogleMaps.ready('map', function(map) {
+		//set form into google map
+		var form = document.getElementsByClassName('main-form')[0];
+		form.getElementsByClassName('form-control')[0].style.display = 'block';
+		map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(form);
+	});
 });
 
 map = new Map();
