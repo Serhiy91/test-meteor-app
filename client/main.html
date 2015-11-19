@@ -3,14 +3,18 @@
 </head>
 <body>
 	{{> errors}}
-	<div class="container">
-		{{#unless currentUser}}
-			{{> auth}}
+		{{#if loadingUser}}
+			{{> spinner}}
 		{{else}}
-			{{> userInfo}}
-			{{> prevQueries}}
-			{{> map}}
-			{{> venuesList}}
-		{{/unless}}
-	</div>
+			<div class="container">
+				{{#unless currentUser}}
+					{{> auth}}
+				{{else}}
+					{{> userInfo}}
+					{{> prevQueries}}
+					{{> map}}
+					{{> venuesList}}
+				{{/unless}}
+			</div>
+		{{/if}}
 </body>

@@ -48,6 +48,11 @@
 	}
 }
 
+.container {
+	opacity: 1;
+	animation: content-appear 0.7s;
+}
+
 @keyframes error-appear {
 	from {
 		right: -200px;
@@ -56,5 +61,14 @@
 	to {
 		right: 0;
 		opacity: 0.9;
+	}
+}
+
+@keyframes content-appear {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
