@@ -12,17 +12,29 @@
 					<td>City</td>
 					<td>Street Address</td>
 					<td>Latitude</td>
-					<td class="last">longitude</td>
+					<td class="last">Longitude</td>
 				</tr>
 				</thead>
 				<tbody>
 				{{#each venues}}
 					<tr>
-						<td class="first">{{name}}</td>
-						<td class="{{#unless location.city}}not-available{{/unless}}">{{location.city}}</td>
-						<td class="{{#unless location.address}}not-available{{/unless}}">{{location.address}}</td>
-						<td>{{formatLatLng location.lat}}</td>
-						<td class="last">{{formatLatLng location.lng}}</td>
+						<td data-title="Name" class="first">{{name}}</td>
+						<td data-title="City">
+							{{#if location.city}}
+								{{location.city}}
+							{{else}}
+								<span class="not-available">data not available</span>
+							{{/if}}
+						</td>
+						<td data-title="Street Address">
+							{{#if location.address}}
+								{{location.address}}
+							{{else}}
+								<span class="not-available">data not available</span>
+							{{/if}}
+						</td>
+						<td data-title="Latitude">{{formatLatLng location.lat}}</td>
+						<td data-title="Longitude" class="last">{{formatLatLng location.lng}}</td>
 					</tr>
 				{{/each}}
 				</tbody>

@@ -157,6 +157,7 @@ body {
 				 }
 				.first {
 					text-align: left;
+					z-index: 10;
 				}
 			}
 			.delete-query {
@@ -216,7 +217,7 @@ body {
 					}
 				}
 			}
-			.table.venues {
+			.venues {
 				thead td {
 					padding: 20px 8px;
 					color: #9E9E9E;
@@ -224,15 +225,14 @@ body {
 				td {
 					text-align: right;
 				}
-				td.first {
+				.first {
 					text-align: left;
 					padding-left: 20px;
 				}
-				td.last {
+				.last {
 					padding-right: 20px;
 				}
-				td.not-available:before {
-					content: 'data not available';
+				.not-available {
 					font-size: 85%;
 					color: #BDBDBD;
 				}
@@ -240,6 +240,12 @@ body {
 					cursor: pointer;
 					&:hover {
 						background: #eaf1f7;
+					}
+				}
+				.checked {
+					background: #c1d7e9;
+					&:hover {
+						background: #c1d7e9;
 					}
 				}
 			}
@@ -271,5 +277,50 @@ body {
 	}
 	.login-form {
 		border-radius: 0;
+	}
+}
+
+@media (max-width: 600px) {
+	.venues-list .table.venues {
+		display: block;
+		thead, tbody, th, td, tr {
+			display: block;
+		}
+		td.last, td.first {
+			white-space: normal;
+			text-align: right !important;
+			width: 100%;
+			padding-right: 8px !important;
+		}
+		thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		tr {
+			border-top: 1px solid #ccc;
+		}
+		td {
+			position: relative;
+			padding-left: 40%;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			white-space: normal;
+			text-align: right;
+			border: none;
+		}
+		td:before {
+			position: absolute;
+			top: 6px;
+			left: 6px;
+			width: 40%;
+			padding-right: 10px;
+			white-space: nowrap;
+			text-align:left;
+			font-weight: bold;
+		}
+		td:before {
+			content: attr(data-title);
+		}
 	}
 }

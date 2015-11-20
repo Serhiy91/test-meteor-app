@@ -10,7 +10,7 @@ Template.venuesList.helpers({
 Template.venuesList.events({
 	'click .table tr': function(e) {
 		Venues.update(this._id, {$set: {checked: ! this.checked}});
-		e.currentTarget.style.backgroundColor = !this.checked ? '#c1d7e9' : '#fff'
+		e.currentTarget.className = !this.checked ? 'checked' : ''
 	},
 	'click .csv': function() {
 		exportVenues();
