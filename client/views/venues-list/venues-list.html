@@ -1,23 +1,32 @@
 <template name="venuesList">
 	<section class="venues-list">
 		{{#if venuesCount}}
-			<div>
-				{{venuesCount}} Venues
+			<div class="table-control">
+				<button type="button" class="btn btn-primary btn-sm csv">Export CSV</button>
+				<span class="venues-count">{{venuesCount}} Venues</span>
 			</div>
-			<button type="button" class="btn btn-primary btn-sm csv">Export CSV</button>
-		{{/if}}
-		<table class="table">
-			<tbody>
+			<table class="table venues">
+				<thead>
+				<tr>
+					<td class="first">Name</td>
+					<td>City</td>
+					<td>Street Address</td>
+					<td>Latitude</td>
+					<td class="last">longitude</td>
+				</tr>
+				</thead>
+				<tbody>
 				{{#each venues}}
 					<tr>
-						<td>{{name}}</td>
-						<td>{{location.city}}</td>
-						<td>{{location.address}}</td>
-						<td>{{location.lat}}</td>
-						<td>{{location.lng}}</td>
+						<td class="first">{{name}}</td>
+						<td class="{{#unless location.city}}not-available{{/unless}}">{{location.city}}</td>
+						<td class="{{#unless location.address}}not-available{{/unless}}">{{location.address}}</td>
+						<td>{{formatLatLng location.lat}}</td>
+						<td class="last">{{formatLatLng location.lng}}</td>
 					</tr>
 				{{/each}}
-			</tbody>
-		</table>
+				</tbody>
+			</table>
+		{{/if}}
 	</section>
 </template>
