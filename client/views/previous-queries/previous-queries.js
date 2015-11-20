@@ -12,7 +12,13 @@ Template.prevQueries.events({
 	},
 	'click .request': function(e) {
 		e.preventDefault();
-		var queryObject = Queries.findOne(this._id);
+		var queryObject = {
+			query: this.query,
+			lat: this.lat,
+			lng: this.lng,
+			radius: this.radius,
+			zoom: this.zoom
+		};
 
 		//set options for google map
 		map.setMapState(queryObject);

@@ -18,7 +18,8 @@ Meteor.methods({
 			v: FOURSQUARE_VERSION,
 			radius: queryData.radius * 1000,
 			query: queryData.query,
-			ll: queryData.lat + ',' + queryData.lng
+			ll: queryData.lat + ',' + queryData.lng,
+			limit: 50
 		};
 
 		try {

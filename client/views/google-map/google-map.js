@@ -40,7 +40,6 @@ Template.map.events({
 	'submit .main-form': function(e) {
 		e.preventDefault();
 		var regexp = /[\d \s().+~`!@#$%&=\\|]/;
-		var lastQuery = Queries.findOne({}, {sort: {date: -1}});
 		var query = e.target[0].value;
 
 		if(!Meteor.user()) {
@@ -67,14 +66,6 @@ Template.map.events({
 		var queryObject = map.getCurrentState();
 		queryObject.query = query;
 
-		if (lastQuery) {
-			if (queryObject.query === lastQuery.query &&
-				queryObject.lat === lastQuery.lat &&
-				queryObject.lng === lastQuery.lng) {
-				return;
-			}
-		}
-
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
 			if (err) {
@@ -82,9 +73,14 @@ Template.map.events({
 				return;
 			}
 
+			if (venues.length === 0) {
+				throwError('Find 0 venues');
+				return;
+			}
+
 			Meteor.call('addQuery', queryObject, function(err) {
 				if (err) {
-					throwError('Sorry, the request was unsuccessful');
+					throwError(err.message);
 				}
 			});
 
@@ -92,6 +88,8 @@ Template.map.events({
 			_.each(venues, function(venue) {
 				Venues.insert(venue);
 			});
+
+			e.target[0].value = '';
 		});
 	}
 });
