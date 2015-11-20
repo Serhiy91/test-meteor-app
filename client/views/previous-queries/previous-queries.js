@@ -15,7 +15,7 @@ Template.prevQueries.events({
 		var queryObject = Queries.findOne(this._id);
 
 		//set options for google map
-		map.setMapState(queryObject, GoogleMaps.maps.map.instance);
+		map.setMapState(queryObject);
 
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {

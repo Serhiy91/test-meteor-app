@@ -194,7 +194,7 @@ body {
 		margin-bottom: 15px;
 		.map-container {
 			max-width: 100%;
-			height: 400px;
+			height: 550px;
 		}
 		.venues-list {
 			.table-control {
@@ -280,6 +280,7 @@ body {
 	}
 }
 
+//responsive table
 @media (max-width: 600px) {
 	.venues-list .table.venues {
 		display: block;

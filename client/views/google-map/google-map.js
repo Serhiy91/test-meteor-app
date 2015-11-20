@@ -1,3 +1,4 @@
+map = undefined;
 var LATITUDE = 35.6833;
 var LONGITUDE = 139.7833;
 var ZOOM = 11;
@@ -26,15 +27,14 @@ Template.map.helpers({
 });
 
 Template.map.onCreated(function() {
-	GoogleMaps.ready('map', function(map) {
+	GoogleMaps.ready('map', function(googleMap) {
+		map = new Map(googleMap.instance);
 		//set form into google map
 		var form = document.getElementsByClassName('main-form')[0];
 		form.getElementsByClassName('form-control')[0].style.display = 'block';
-		map.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(form);
+		googleMap.instance.controls[google.maps.ControlPosition.TOP_LEFT].push(form);
 	});
 });
-
-map = new Map();
 
 Template.map.events({
 	'submit .main-form': function(e) {
@@ -64,7 +64,7 @@ Template.map.events({
 		}
 
 		//get google map data for request to foursquare
-		var queryObject = map.getCurrentState(GoogleMaps.maps.map.instance);
+		var queryObject = map.getCurrentState();
 		queryObject.query = query;
 
 		if (lastQuery) {

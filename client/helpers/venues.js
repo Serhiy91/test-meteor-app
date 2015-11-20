@@ -3,10 +3,10 @@ Venues = new Meteor.Collection(null);
 //make reactive map markers
 Venues.find().observe({
 	added: function(venue) {
-		map.addMark(venue, GoogleMaps.maps.map.instance);
+		map.addMark(venue);
 	},
 	changed: function(newVenue) {
-		map.updateMark(newVenue, GoogleMaps.maps.map.instance);
+		map.updateMark(newVenue);
 	},
 	removed: function(venue) {
 		map.removeMark(venue);
