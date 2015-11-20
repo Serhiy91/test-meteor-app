@@ -3,9 +3,13 @@
 		{{#each queries}}
 			<div class="query-item">
 				<div class="query">
-					<span><a href class="request"><strong>{{query}}</strong></a></span>
-					<span>{{formatLatLng lat}}</span> <span>{{formatLatLng lng}}</span>
-					<span>{{formatDistance radius}}</span> <span>{{formatTime date}}</span>
+					<div class="row">
+						<div class="col-xs-4 first"><a href class="request"><strong>{{query}}</strong></a></div>
+						<div class="col-sm-2">{{formatLatLng lat}}</div>
+						<div class="col-sm-2">{{formatLatLng lng}}</div>
+						<div class="col-sm-1">{{formatDistance radius}}</div>
+						<div class="col-sm-3">{{formatTime date}}</div>
+					</div>
 				</div>
 				<div class="delete-query">
 					<span class="glyphicon glyphicon-trash"></span>

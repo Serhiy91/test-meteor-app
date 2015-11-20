@@ -152,9 +152,16 @@ body {
 				margin-right: 8px;
 				@include group-item-list;
 				@include box-shadow-helper(1);
+				div {
+					text-align: right;
+				 }
+				.first {
+					text-align: left;
+				}
 			}
 			.delete-query {
 				width: 44px;
+				color: #337ab7;
 				transition: all 250ms;
 				@include group-item-list;
 				&:hover {
@@ -179,14 +186,17 @@ body {
 			}
 		}
 	}
-	.map-container {
-		max-width: 100%;
-		height: 400px;
+	.wrapper {
+		background: #fff;
 		@include box-shadow-helper(2);
-	}
-	.venues-list {
-		.csv {
-			float: right;
+		.map-container {
+			max-width: 100%;
+			height: 400px;
+		}
+		.venues-list {
+			.csv {
+				float: right;
+			}
 		}
 	}
 }
