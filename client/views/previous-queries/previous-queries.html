@@ -1,18 +1,17 @@
 <template name="prevQueries">
 	<section class="previous-queries">
-		<table class="table">
-			<tbody>
-			{{#each queries}}
-				<tr>
-					<td><a href class="request">{{query}}</a></td>
-					<td>{{lat}}</td>
-					<td>{{lng}}</td>
-					<td>{{radius}}</td>
-					<td>{{date}}</td>
-					<td><span class="glyphicon glyphicon-trash delete"></span></td>
-				</tr>
-			{{/each}}
-			</tbody>
-		</table>
+		{{#each queries}}
+			<div class="query-item">
+				<div class="query">
+					<span><a href class="request"><strong>{{query}}</strong></a></span>
+					<span>{{formatLatLng lat}}</span> <span>{{formatLatLng lng}}</span>
+					<span>{{formatDistance radius}}</span> <span>{{formatTime date}}</span>
+				</div>
+				<div class="delete-query">
+					<span class="glyphicon glyphicon-trash"></span>
+				</div>
+			</div>
+		{{/each}}
+		<div class="clear"></div>
 	</section>
 </template>

@@ -7,7 +7,7 @@ Template.prevQueries.helpers({
 });
 
 Template.prevQueries.events({
-	'click .delete': function() {
+	'click .delete-query': function() {
 		Queries.remove(this._id);
 	},
 	'click .request': function(e) {

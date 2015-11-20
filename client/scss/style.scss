@@ -15,6 +15,13 @@
 		box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 	}
 }
+@mixin group-item-list {
+	background: #fff;
+	padding: 10px 15px;
+	margin-bottom: 8px;
+	float: left;
+	@include box-shadow-helper(1);
+}
 
 @keyframes logo-animate {
 	from {
@@ -53,6 +60,10 @@
 
 body {
 	background: #eeeeee;
+}
+
+.clear {
+	clear: both;
 }
 
 .header-auth-page {
@@ -133,6 +144,26 @@ body {
 .container {
 	opacity: 1;
 	animation: content-appear 0.7s;
+	.previous-queries {
+		margin-bottom: 15px;
+		.query-item {
+			.query {
+				width: calc(100% - 52px);
+				margin-right: 8px;
+				@include group-item-list;
+				@include box-shadow-helper(1);
+			}
+			.delete-query {
+				width: 44px;
+				transition: all 250ms;
+				@include group-item-list;
+				&:hover {
+					@include box-shadow-helper(2);
+					transform: translateY(-3px);
+				}
+			}
+		}
+	}
 	.main-form {
 		margin: 5px 0 0 30px;
 		width: calc(100% - 60px);
