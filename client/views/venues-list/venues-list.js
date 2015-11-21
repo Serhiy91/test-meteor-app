@@ -8,7 +8,7 @@ Template.venuesList.helpers({
 });
 
 Template.venuesList.events({
-	'click .table tr': function(e) {
+	'click .table tbody tr': function(e) {
 		Venues.update(this._id, {$set: {checked: ! this.checked}});
 		e.currentTarget.className = !this.checked ? 'checked' : ''
 	},

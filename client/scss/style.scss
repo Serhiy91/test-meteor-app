@@ -19,6 +19,7 @@
 	background: #fff;
 	padding: 10px 15px;
 	margin-bottom: 8px;
+	border-radius: 2px;
 	float: left;
 	@include box-shadow-helper(1);
 }
@@ -146,6 +147,26 @@ body {
 	animation: content-appear 0.7s;
 	.previous-queries {
 		margin-bottom: 15px;
+		.show-all, .show-last-4 {
+			float: right;
+			.label {
+				font-size: 115%;
+				padding-right: 8px;
+				color: #757575;
+			}
+			button {
+				padding: 10px 15px;
+				margin-bottom: 8px;
+				border: none;
+				border-radius: 2px;
+				transition: all 250ms;
+				@include box-shadow-helper(1);
+				&:hover {
+					@include box-shadow-helper(2);
+					transform: translateY(-3px);
+				}
+			}
+		}
 		.query-item {
 			.query {
 				width: calc(100% - 52px);

@@ -73,6 +73,8 @@ Template.map.events({
 				return;
 			}
 
+			Venues.remove({});
+
 			if (venues.length === 0) {
 				throwError('Find 0 venues');
 				return;
@@ -84,7 +86,6 @@ Template.map.events({
 				}
 			});
 
-			Venues.remove({});
 			_.each(venues, function(venue) {
 				Venues.insert(venue);
 			});
