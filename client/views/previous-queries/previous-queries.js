@@ -1,32 +1,53 @@
+var LIMIT_QUERIES = 4;
+var NO_LIMIT = 0;
+
+Meteor.startup(function () {
+	Session.set('limitPrevQueries', LIMIT_QUERIES);
+});
+
+//subscribe to data and set limit value
 Deps.autorun(function() {
-	var limit = Session.get('limitPrevQueries');
-	limit = limit === 0 ? 0 : 4;
-	Meteor.subscribe('queries', {date: -1}, limit);
+	Meteor.subscribe('queries', {date: -1}, Session.get('limitPrevQueries'));
 });
 
 Template.prevQueries.helpers({
 	queries: function() {
-		var limit = Session.get('limitPrevQueries');
-		limit = limit === 0 ? 0 : 4;
-		return Queries.find({}, {sort: {date: 1}, limit: limit});
+		return Queries.find({}, {sort: {date: 1}, limit: Session.get('limitPrevQueries')});
 	},
 	isMore4Queries: function() {
-		return Queries.find().count() > 3;
-	},
-	isShowAll: function() {
-		return Session.get('limitPrevQueries') === 0;
+		return Counts.get('queriesCounter') > LIMIT_QUERIES;
 	}
 });
 
 Template.prevQueries.events({
-	'click .show-all button': function() {
-		Session.set('limitPrevQueries', 0);
+	//button for switching between two list state
+	'click .query-toggle button': function(e) {
+		var limit = Session.get('limitPrevQueries');
+		var label = e.currentTarget.previousElementSibling;
+		var icon = e.currentTarget.firstElementChild;
+
+		if (limit) {
+			limit = NO_LIMIT;
+			label.innerHTML = 'Show last 4 queries';
+			icon.className = 'glyphicon glyphicon-chevron-down';
+		} else {
+			limit = LIMIT_QUERIES;
+			label.innerHTML = 'Show all queries';
+			icon.className = 'glyphicon glyphicon-chevron-up';
+		}
+
+		Session.set('limitPrevQueries', limit);
 	},
-	'click .show-last-4 button': function() {
-		Session.set('limitPrevQueries', 4);
-	},
-	'click .delete-query': function() {
-		Queries.remove(this._id);
+	'click .delete-query': function(e) {
+		//ugly hack
+		var preQueElem = e.currentTarget.parentNode.parentNode;
+		if (Counts.get('queriesCounter') > LIMIT_QUERIES + 1) {
+			preQueElem.style.height = '240px';
+			Queries.remove(this._id);
+		} else {
+			preQueElem.style.height = '';
+			Queries.remove(this._id);
+		}
 	},
 	'click .request': function(e) {
 		e.preventDefault();

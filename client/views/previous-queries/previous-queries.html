@@ -1,28 +1,20 @@
 <template name="prevQueries">
 	<section class="previous-queries">
-	{{#if isMore4Queries}}
-		{{#if isShowAll}}
-			<div class="show-last-4">
-				<span class="label">Show last 4 queries</span>
-				<button type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-chevron-down"></span>
-				</button>
-			</div>
-		{{else}}
-			<div class="show-all">
+		{{#if isMore4Queries}}
+			<div class="query-toggle">
 				<span class="label">Show all queries</span>
 				<button type="button" class="btn btn-primary">
 					<span class="glyphicon glyphicon-chevron-up"></span>
 				</button>
 			</div>
 		{{/if}}
-	{{/if}}
 		<div class="clear"></div>
 		{{#each queries}}
 			<div class="query-item">
 				<div class="query">
 					<div class="row">
-						<div class="col-xs-4 first"><a href class="request"><strong>{{query}}</strong></a></div>
+						<div class="col-xs-4 first"><a href
+								class="request"><strong>{{query}}</strong></a></div>
 						<div class="col-sm-2">{{formatLatLng lat}}</div>
 						<div class="col-sm-2">{{formatLatLng lng}}</div>
 						<div class="col-sm-1">{{formatDistance radius}}</div>

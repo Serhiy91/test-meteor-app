@@ -147,7 +147,7 @@ body {
 	animation: content-appear 0.7s;
 	.previous-queries {
 		margin-bottom: 15px;
-		.show-all, .show-last-4 {
+		.query-toggle {
 			float: right;
 			.label {
 				font-size: 115%;
@@ -164,6 +164,9 @@ body {
 				&:hover {
 					@include box-shadow-helper(2);
 					transform: translateY(-3px);
+				}
+				&:focus {
+					outline: none;
 				}
 			}
 		}
