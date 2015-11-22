@@ -15,6 +15,7 @@ Template.prevQueries.helpers({
 		return Queries.find({}, {sort: {date: 1}, limit: Session.get('limitPrevQueries')});
 	},
 	isMore4Queries: function() {
+		//get document count from Queries collection
 		return Counts.get('queriesCounter') > LIMIT_QUERIES;
 	}
 });

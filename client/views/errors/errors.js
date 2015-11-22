@@ -6,7 +6,7 @@ Template.errors.helpers({
 
 //cancel error message limitation by click
 Template.errors.events({
-	'click .alert-danger': function() {
+	'click .alert': function() {
 		clearTimeout(errorsTimersList[this._id]);
 	}
 });

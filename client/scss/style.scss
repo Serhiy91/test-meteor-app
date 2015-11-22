@@ -283,6 +283,9 @@ body {
 	right: 0;
 	z-index: 100;
 	.alert {
+		clear: right;
+		float: right;
+		display: inline-block;
 		position: relative;
 		animation: error-appear 0.5s;
 		opacity: 0.9;

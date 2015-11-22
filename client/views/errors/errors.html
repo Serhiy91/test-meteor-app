@@ -7,7 +7,7 @@
 </template>
 
 <template name="error">
-	<div class="alert alert-danger">
+	<div class="alert {{#if warn}}alert-warning{{else}}alert-danger{{/if}}">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		{{message}}
 	</div>

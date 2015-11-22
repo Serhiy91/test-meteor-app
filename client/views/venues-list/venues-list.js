@@ -8,6 +8,7 @@ Template.venuesList.helpers({
 });
 
 Template.venuesList.events({
+	//check venues by clicking venue item
 	'click .table tbody tr': function(e) {
 		Venues.update(this._id, {$set: {checked: ! this.checked}});
 		e.currentTarget.className = !this.checked ? 'checked' : ''

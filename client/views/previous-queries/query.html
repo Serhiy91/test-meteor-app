@@ -1,0 +1,17 @@
+<template name="query">
+	<div class="query-item">
+		<div class="query">
+			<div class="row">
+				<div class="col-xs-4 first"><a href
+						class="request"><strong>{{query}}</strong></a></div>
+				<div class="col-sm-2">{{formatLatLng lat}}</div>
+				<div class="col-sm-2">{{formatLatLng lng}}</div>
+				<div class="col-sm-1">{{formatDistance radius}}</div>
+				<div class="col-sm-3">{{formatTime date}}</div>
+			</div>
+		</div>
+		<div class="delete-query">
+			<span class="glyphicon glyphicon-trash"></span>
+		</div>
+	</div>
+</template>

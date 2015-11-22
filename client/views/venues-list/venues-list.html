@@ -17,25 +17,7 @@
 				</thead>
 				<tbody>
 				{{#each venues}}
-					<tr>
-						<td data-title="Name" class="first">{{name}}</td>
-						<td data-title="City">
-							{{#if location.city}}
-								{{location.city}}
-							{{else}}
-								<span class="not-available">data not available</span>
-							{{/if}}
-						</td>
-						<td data-title="Street Address">
-							{{#if location.address}}
-								{{location.address}}
-							{{else}}
-								<span class="not-available">data not available</span>
-							{{/if}}
-						</td>
-						<td data-title="Latitude">{{formatLatLng location.lat}}</td>
-						<td data-title="Longitude" class="last">{{formatLatLng location.lng}}</td>
-					</tr>
+					{{> venue}}
 				{{/each}}
 				</tbody>
 			</table>

@@ -1,6 +1,7 @@
 Queries = new Meteor.Collection('queries');
 
 Queries.allow({
+	//user can delete only his queries
 	remove: function(userId, doc) {
 		return doc && doc.userId === userId;
 	}

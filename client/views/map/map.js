@@ -28,7 +28,9 @@ Template.map.helpers({
 
 Template.map.onCreated(function() {
 	GoogleMaps.ready('map', function(googleMap) {
+		//create map global object
 		map = new Map(googleMap.instance);
+
 		//set form into google map
 		var form = document.getElementsByClassName('main-form')[0];
 		form.getElementsByClassName('form-control')[0].style.display = 'block';
@@ -42,6 +44,7 @@ Template.map.events({
 		var regexp = /[\d \s().+~`!@#$%&=\\|]/;
 		var query = e.target[0].value;
 
+		//show errors
 		if(!Meteor.user()) {
 			throwError('You need to sign in');
 			return;
@@ -69,17 +72,19 @@ Template.map.events({
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
 			if (err) {
-				throwError('Sorry, the request was unsuccessful');
+				throwError(err.message);
 				return;
 			}
 
 			Venues.remove({});
 
+			//show warning
 			if (venues.length === 0) {
-				throwError('Find 0 venues');
+				throwError('Find 0 venues', true);
 				return;
 			}
 
+			//add query in Query collection
 			Meteor.call('addQuery', queryObject, function(err) {
 				if (err) {
 					throwError(err.message);
