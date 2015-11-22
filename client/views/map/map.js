@@ -13,7 +13,6 @@ Template.map.helpers({
 			return {
 				center: new google.maps.LatLng(LATITUDE, LONGITUDE),
 				zoom: ZOOM,
-				mapTypeControl: true,
 				mapTypeControlOptions: {
 					position: google.maps.ControlPosition.BOTTOM_LEFT,
 					mapTypeIds: [
