@@ -63,8 +63,14 @@ Template.prevQueries.events({
 		//set options for google map
 		map.setMapState(queryObject);
 
+		//spinner start
+		Session.set('spinner', true);
+
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
+			//spinner finish
+			Session.set('spinner', false);
+
 			if (err) {
 				throwError('Sorry, the request was unsuccessful');
 				return;

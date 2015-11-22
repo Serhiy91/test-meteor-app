@@ -23,6 +23,9 @@ Template.map.helpers({
 				}
 			};
 		}
+	},
+	isSpinner: function() {
+		return Session.get('spinner');
 	}
 });
 
@@ -69,8 +72,13 @@ Template.map.events({
 		var queryObject = map.getCurrentState();
 		queryObject.query = query;
 
+		//spinner start
+		Session.set('spinner', true);
+
 		//make request to foursquare
 		Meteor.call('searchVenues', queryObject, function(err, venues) {
+			//spinner finish
+			Session.set('spinner', false);
 			if (err) {
 				throwError(err.message);
 				return;

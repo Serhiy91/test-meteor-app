@@ -6,6 +6,9 @@
 			</div>
 		</form>
 		<div class="map-container">
+			{{#if isSpinner}}
+				{{> spinner}}
+			{{/if}}
 			{{> googleMap name="map" options=mapOptions}}
 		</div>
 	</section>
