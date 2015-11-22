@@ -58,6 +58,14 @@
 		opacity: 1;
 	}
 }
+@keyframes qwe {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
 
 body {
 	background: #eeeeee;
@@ -185,14 +193,29 @@ body {
 				}
 			}
 			.delete-query {
-				width: 44px;
 				color: #337ab7;
 				cursor: pointer;
+				position: relative;
 				transition: all 250ms;
 				@include group-item-list;
+				padding: 0;
+				.simple-btn {
+					width: 44px;
+					padding: 8px 13px;
+					font-size: 120%;
+				}
 				&:hover {
 					@include box-shadow-helper(2);
 					transform: translateY(-3px);
+				}
+				.delay-btn {
+					position: absolute;
+					height: 100%;
+					width: 100%;
+					z-index: 10;
+					background: rgba(187, 222, 251, 0.4);
+					border-radius: 3px;
+					animation: qwe linear 2s;
 				}
 			}
 		}

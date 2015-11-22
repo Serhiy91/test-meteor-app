@@ -40,7 +40,7 @@ Template.prevQueries.events({
 		Session.set('limitPrevQueries', limit);
 	},
 	'click .delete-query': function(e) {
-		//ugly hack
+		/*ugly hack
 		var preQueElem = e.currentTarget.parentNode.parentNode;
 		if (Counts.get('queriesCounter') > LIMIT_QUERIES + 1) {
 			preQueElem.style.height = '240px';
@@ -48,6 +48,29 @@ Template.prevQueries.events({
 		} else {
 			preQueElem.style.height = '';
 			Queries.remove(this._id);
+		}*/
+		var self = this;
+		var delQueryElem = e.currentTarget;
+		var simpleBtn = delQueryElem.firstElementChild;
+		simpleBtn.firstElementChild.className = 'glyphicon glyphicon-question-sign';
+
+		//create and insert loading element into delete button
+		var delayBtn = document.createElement('div');
+		delayBtn.className = 'delay-btn';
+		delQueryElem.insertBefore(delayBtn, simpleBtn);
+
+		//add event listener for deleting query by second click
+		delQueryElem.addEventListener('click', removeVenue);
+
+		//remove event listener and loading element in 2 sec if there is not second click
+		setTimeout(function() {
+			delQueryElem.removeEventListener('click', removeVenue);
+			delQueryElem.removeChild(delayBtn);
+			simpleBtn.firstElementChild.className = 'glyphicon glyphicon-trash';
+		}, 2000);
+
+		function removeVenue() {
+			Queries.remove(self._id);
 		}
 	},
 	'click .request': function(e) {
