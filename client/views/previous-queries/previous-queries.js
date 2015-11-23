@@ -7,7 +7,7 @@ Meteor.startup(function () {
 
 //subscribe to data and set limit value
 Deps.autorun(function() {
-	Meteor.subscribe('queries', {date: -1}, Session.get('limitPrevQueries'));
+	Meteor.subscribe('queries', Session.get('limitPrevQueries'));
 });
 
 Template.prevQueries.helpers({
@@ -40,15 +40,6 @@ Template.prevQueries.events({
 		Session.set('limitPrevQueries', limit);
 	},
 	'click .delete-query': function(e) {
-		/*ugly hack
-		var preQueElem = e.currentTarget.parentNode.parentNode;
-		if (Counts.get('queriesCounter') > LIMIT_QUERIES + 1) {
-			preQueElem.style.height = '240px';
-			Queries.remove(this._id);
-		} else {
-			preQueElem.style.height = '';
-			Queries.remove(this._id);
-		}*/
 		var self = this;
 		var delQueryElem = e.currentTarget;
 		var simpleBtn = delQueryElem.firstElementChild;
@@ -70,7 +61,26 @@ Template.prevQueries.events({
 		}, 2000);
 
 		function removeVenue() {
-			Queries.remove(self._id);
+			//ugly hack for delete map flicker
+			var container = delQueryElem.parentNode.parentNode;
+			var containerHeight = container.offsetHeight;
+
+			if (Counts.get('queriesCounter') > LIMIT_QUERIES + 1) {
+				container.style.minHeight = containerHeight + 'px';
+				Queries.remove(self._id);
+				window.addEventListener('resize', res);
+			} else {
+				if (container.style.minHeight) {
+					container.style.minHeight = '';
+				}
+				Queries.remove(self._id);
+			}
+
+			function res() {
+				container.style.minHeight = '';
+				window.removeEventListener('resize', res);
+			}
+			//ugly hack
 		}
 	},
 	'click .request': function(e) {

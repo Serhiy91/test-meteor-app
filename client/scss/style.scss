@@ -153,6 +153,7 @@ body {
 .container {
 	opacity: 1;
 	animation: content-appear 0.7s;
+	max-width: 1000px;
 	.previous-queries {
 		margin-bottom: 15px;
 		.query-toggle {

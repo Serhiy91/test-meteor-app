@@ -1,24 +1,24 @@
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<meta charset="utf-8">
 	<title>Test Meteor App</title>
 </head>
 <body>
-	{{> errors}}
-		{{#if loadingUser}}
-			{{> spinner}}
-		{{else}}
-			{{#unless currentUser}}
-				{{> auth}}
-			{{else}}
-				{{> header}}
-				<div class="container">
-					{{> prevQueries}}
-					<div class="wrapper">
-						{{> map}}
-						{{> venuesList}}
-					</div>
-				</div>
-			{{/unless}}
-		{{/if}}
+{{> errors}}
+{{#if loadingUser}}
+	{{> spinner}}
+{{else}}
+	{{#unless currentUser}}
+		{{> auth}}
+	{{else}}
+		{{> header}}
+		<div class="container">
+			{{> prevQueries}}
+			<div class="wrapper">
+				{{> map}}
+				{{> venuesList}}
+			</div>
+		</div>
+	{{/unless}}
+{{/if}}
 </body>
