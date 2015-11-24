@@ -33,15 +33,9 @@ Template.map.onCreated =>
 Template.map.events
 	'submit .main-form': (e) ->
 		e.preventDefault()
-		regexp = /[\d \s().+~`!@#$%&=\\|]/
 		query = e.target[0].value
 
-		# Show errors
 		if not Meteor.user() then return throwError 'You need to sign in'
-		if not query then return throwError 'Please enter some request'
-		if query.length < 2 then return throwError 'This request is not allowed'
-		if query.search(regexp) isnt -1
-			return throwError 'The request contains invalid characters'
 
 		# Get google map data for request to foursquare
 		queryObject = map.getCurrentState()
@@ -54,9 +48,9 @@ Template.map.events
 		Meteor.call 'searchVenues', queryObject, (err, venues) ->
 			# Spinner finish
 			Session.set 'spinner', false
-			if err then return throwError err.message
-
 			Venues.remove({})
+
+			if err then return throwError err.message
 
 			# Show warning
 			if venues.length is 0 then return throwError('Find 0 venues', true)

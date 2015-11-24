@@ -62,7 +62,7 @@ Template.prevQueries.events
 		@removeUIFlicker = =>
 			container = delQueryElem.parentNode.parentNode
 			containerHeight = container.offsetHeight
-			if Counts.get('queriesCounter') > LIMIT_QUERIES + 1
+			if Counts.get('queriesCounter') > LIMIT_QUERIES + 1 and Session.get 'limitPrevQueries'
 				container.style.minHeight = containerHeight + 'px'
 
 				res = ->
